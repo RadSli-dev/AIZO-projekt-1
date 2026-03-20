@@ -1,6 +1,7 @@
 #include "heap.hpp"
 #include "vector.hpp"
 #include "randomizer.hpp"
+#include "sorter.hpp"
 
 int main(){
     vector<int> v(10u);
@@ -11,11 +12,13 @@ int main(){
 
     v.populate(intGenerator, 0, 10, 0, 10);
     auto comp_g = [](int a, int b){return a > b;};
-    heap<int> h(v, comp_g);
-    v.print();
-    h.arr.print();
+    auto comp_s = [](int a, int b){return a < b;};
 
-    //v.print();
+    v.print();
+    heap<int> h(v, comp_s);
+    h.arr.print();
+    sorter::heap_sort(h, comp_s);
+    h.arr.print();
     
     
     return 0;

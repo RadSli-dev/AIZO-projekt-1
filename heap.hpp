@@ -13,7 +13,7 @@ public:
     template <typename Func>
     heap(vector<T>& arr, Func comp){
         arr.copy_to(this->arr);
-        build_heeap(comp); //creates a heap out of passed vector
+        build_heap(comp); //creates a heap out of passed vector
     }
 
     //comp odpowiadający na pytanie a>b buduje max-heap, a na a<b buduje min-heap
@@ -35,7 +35,7 @@ public:
     }
 
     template <typename Func>
-    void build_heeap(Func comp){
+    void build_heap(Func comp){
         heapSize = arr.len();
         for (std::size_t i = arr.len()/2; i > 0; --i){
             heapify(i, comp);

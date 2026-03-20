@@ -7,10 +7,10 @@ public:
     //comp ma zwracać odpowiedź na zapytanie o pierwszy argument względem drugiego -> jeżeli chcemy zapytać o to czy l > r to comp(l,r) powinien zwracać true
     template <typename T, typename Func>
     static void heap_sort(heap<T>& arr, Func comp){
-        for (std::size_t i = arr.size()/2; i > 1; --i){
-            arr.swap(i,1);
+        for (std::size_t i = arr.arr.len()-1; i > 0; --i){
+            arr.swap(i,0);
             --arr.heapSize;
-            arr.heapify(1, comp);
+            arr.heapify(0, comp);
         }
     }
 
