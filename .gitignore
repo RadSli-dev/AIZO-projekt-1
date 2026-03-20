@@ -1,2 +1,5 @@
 *.o
 projekt
+.idea/
+a.out
+debug
