@@ -3,3 +3,4 @@ projekt
 .idea/
 a.out
 debug
+*.exe

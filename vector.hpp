@@ -3,7 +3,7 @@
 #include<cstdlib>
 #include<new>
 #include<iostream>
-
+#include<fstream>
 
 template <typename T>
 class vector{
@@ -16,6 +16,7 @@ public:
         resize(initial);
         populate(generator,min,max,lower,upper);
     }
+    explicit vector(const std::string& filename) { file_import(filename); }
     ~vector(){ free(arr); }
     
     void push_back(T elem){
@@ -67,9 +68,40 @@ public:
         
         for(std::size_t i = lower; i<upper; i++){
             arr[i] = generator(min, max);
+            back++;
         }
     }
-    
+
+    void file_import(const std::string& filename){
+        std::ifstream file(filename);
+        if (!file){
+            throw std::invalid_argument("Err: could not open file");
+        }
+        int len;
+        file >> len;
+        if (len > size)
+            resize(len);
+        for (std::size_t i = 0; i < len; i++){
+            file >> arr[i];
+        }
+        file.close();
+
+    }
+
+    void file_export(const std::string& filename)
+    {
+        std::ofstream file(filename);
+        if (!file){
+            throw std::invalid_argument("Err: could not open file");
+        }
+        file << size <<'\n';
+        for (std::size_t i = 0; i < size; i++)
+        {
+            file << arr[i] << '\n';
+        }
+        file.close();
+    }
+
     void copy_to(vector<T>& dest){
         if(dest.len() < size)
             dest.resize(size);
@@ -81,6 +113,13 @@ public:
     void print(){
         for (std::size_t i = 0; i < size; i++){
             std::cout<<arr[i]<< " ";
+        }
+        std::cout<<'\n';
+    }
+
+    void print(std::size_t left, std::size_t right){
+        for (std::size_t i = left; i<right; i++){
+            std::cout<<arr[i]<<" ";
         }
         std::cout<<'\n';
     }

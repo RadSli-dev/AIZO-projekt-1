@@ -16,7 +16,7 @@ $(TARGET): $(OBJS)
 # Compile source files; now depends on HDRS
 # If any .hpp file changes, all .o files will be rebuilt
 %.o: %.cpp $(HDRS)
-	$(CXX) $(STD) -c $< -o $@
+	$(CXX) $(STD) -c  -g $< -o $@
 
 clean:
 	rm -f $(OBJS) $(TARGET)
