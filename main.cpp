@@ -18,8 +18,10 @@ int main(){
     //heap<int> h(v, comp_s);
     //h.arr.print();
     //sorter::heap_sort(h, comp_s);
-    sorter::quick_sort(v, 0, v.len()-1, []<typename T>(vector<T>& arr, std::size_t left, std::size_t right){return left;});
+    //sorter::quick_sort(v, 0, v.len()-1, []<typename T>(vector<T>& arr, std::size_t left, std::size_t right){return left;});
     //h.arr.print();
+    //sorter::insertion_sort(v);
+    sorter::shell_sort(v);
     v.print();
 
 

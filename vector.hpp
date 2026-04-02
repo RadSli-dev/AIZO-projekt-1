@@ -4,6 +4,7 @@
 #include<new>
 #include<iostream>
 #include<fstream>
+#include<initializer_list>
 
 template <typename T>
 class vector{
@@ -17,6 +18,12 @@ public:
         populate(generator,min,max,lower,upper);
     }
     explicit vector(const std::string& filename) { file_import(filename); }
+    vector(std::initializer_list<T> init){
+        resize(init.size());
+        for (T t : init){
+            push_back(t);
+        }
+    }
     ~vector(){ free(arr); }
     
     void push_back(T elem){
@@ -33,25 +40,25 @@ public:
             arr = nullptr;
         }
         if(void* mem = realloc(arr, newSize * sizeof(T))){
-            arr = (T*)mem;
+            arr = static_cast<T*>(mem);
             size = newSize;
         }else{
             throw std::bad_alloc();
         }
     }
     
-    void resize(float scale){
+    void resize(const float scale){
         if(scale <= 0) {
             throw std::invalid_argument("Err: scale must be positive");
         }
-        std::size_t newSize = static_cast<unsigned>(size*scale);
+        const std::size_t newSize = static_cast<unsigned>(size*scale);
         resize(newSize);
     }
     
     void swap(unsigned pos1, unsigned pos2){
         
         if(pos1 >= size || pos2 >= size){
-            throw std::invalid_argument("Err: attempting to swap elements outside vector boundary\n");
+            throw std::invalid_argument("Err: attempting to swap elements outside vector boundary:\n");
         }
             
         T temp = arr[pos1];

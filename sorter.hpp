@@ -14,17 +14,61 @@ public:
         }
     }
 
-    template <typename T, typename Func>
-    static void shell_sort(vector<T>& arr, Func comp){
+    template <typename T>
+    static void insertion_sort(vector<T>& arr){
+        for (int i = 1; i < arr.len(); i++){
+            int j = i;
+            while (j > 0 && arr[j-1] > arr[j]){
+                arr.swap(j,j-1);
+                --j;
+            }
+        }
+    }
 
+    template <typename T>
+    static void gapped_insertion_sort(vector<T>& arr, const std::size_t gap){
+        std::cout<< "gap:" << gap<<'\n';
+        for (std::size_t i = 0; i <= gap-1; i++){
+            std::cout << i << '\n';
+            for (std::size_t j = i + gap; j < arr.len(); j+=gap){
+                std::size_t k = j;
+                std::cout << "    " << j << '\n';
+                while (k > i && arr[k-gap] > arr[k]){
+                    std::cout <<"        " << k << " " << k-gap << '\n';
+                    arr.swap(k,k-gap);
+                    k-=gap;
+                }
+            }
+
+        }
+    }
+
+    template <typename T>
+    static void shell_sort(vector<T>& arr){
+        vector<T> gaps = {3888, 3456, 3072, 2916, 2592, 2304, 2187, 2048, 1944, 1728, 1536, 1458, 1296, 1152, 1024, 972,
+            864, 768, 729, 648, 576, 512, 486, 432, 384, 324, 288, 256, 243, 216, 192, 162, 144, 128, 108, 96, 81, 72, 64,
+            54, 48, 36, 32, 27, 24, 18, 16, 12, 9, 8, 6, 4, 3, 2, 1};
+        for (int gapi = 0; gapi < gaps.len(); gapi++){
+            if (gaps[gapi] < arr.len()){
+                gapped_insertion_sort(arr,gaps[gapi]);
+            }
+        }
     }
     template <typename T, typename Func>
     static void quick_sort(vector<T>& arr, std::size_t left, std::size_t right, Func pivot_select){
         //Correct bound check and default recursion case
         if (left >= arr.len() || right >= arr.len())
             throw std::invalid_argument("Err: quick_sort bounds are outside vector boundary");
-        if (left >= right)
+        if (left - right >= 10){
+            for (std::size_t i = left+1; i <= right; i++){
+                std::size_t j = i;
+                while (j > 0 && arr[j-1] > arr[j]){
+                    arr.swap(j,j-1);
+                    --j;
+                }
+            }
             return;
+        }
 
         //pivot selection
         size_t pivot_index = pivot_select(arr, left, right);
@@ -61,4 +105,5 @@ public:
         //arr.print(left, right);
         return store_index;
     }
+
 };
