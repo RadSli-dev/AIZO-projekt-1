@@ -2,29 +2,90 @@
 #include "vector.hpp"
 #include "randomizer.hpp"
 #include "sorter.hpp"
+#include <chrono>
+
+#define INT_MIN 0x00000000
+#define INT_MAX 0x7fffffff
+
+typedef struct{
+    std::chrono::duration<double> __insertion;
+    std::chrono::duration<double> __shell;
+    std::chrono::duration<double> __heap;
+    std::chrono::duration<double> __quick;
+    std::size_t test_size;
+}test_result;
+
+test_result test_int_10k_random(){
+    randomizer randomizer;
+    test_result t;
+    t.test_size = 10000;
+    
+    auto intGenerator = [&randomizer](int min, int max){return randomizer.randint(min, max);};
+    auto comp_s = [](int a, int b){return a < b;};
+    auto pivot_s = []<typename T>(vector<T>& arr, std::size_t left, std::size_t right){return right;};
+    
+    
+    vector<int> data1(t.test_size);
+    data1.populate(intGenerator, INT_MIN, INT_MAX, 0, t.test_size);
+    vector<int> data2;
+    vector<int> data3;
+    data1.copy_to(data2);
+    data1.copy_to(data3);
+    heap<int> data4(data1, comp_s);
+    
+    const auto start_insertion{std::chrono::steady_clock::now()};
+    sorter::insertion_sort(data1);
+    const auto finish_insertion{std::chrono::steady_clock::now()};
+    const std::chrono::duration<double> elapsed_insertion{finish_insertion - start_insertion};
+    t.__insertion = elapsed_insertion;
+    
+    const auto start_shell{std::chrono::steady_clock::now()};
+    sorter::shell_sort(data2);
+    const auto finish_shell{std::chrono::steady_clock::now()};
+    const std::chrono::duration<double> elapsed_shell{finish_shell - start_shell};
+    t.__shell = elapsed_shell;
+    
+    const auto start_quick{std::chrono::steady_clock::now()};
+    sorter::quick_sort(data3, 0, data3.len() - 1, pivot_s);
+    const auto finish_quick{std::chrono::steady_clock::now()};
+    const std::chrono::duration<double> elapsed_quick{finish_quick - start_quick};
+    t.__quick = elapsed_quick;
+    
+    const auto start_heap{std::chrono::steady_clock::now()};
+    sorter::heap_sort(data4, comp_s);
+    const auto finisht_heap{std::chrono::steady_clock::now()};
+    const std::chrono::duration<double> elapsed_heap{finisht_heap - start_heap};
+    t.__heap = elapsed_heap;
+    
+    return t;
+}
+
 
 int main(){
-    vector<int> v(15u);
-    randomizer randomizer;
+    //vector<int> v(15u);
 
-    auto intGenerator = [&randomizer](int min, int max){return randomizer.randint(min, max);};
-    auto floatGenerator = [&randomizer](float min, float max){return randomizer.randfloat(min, max);};
+    //auto intGenerator = [&randomizer](int min, int max){return randomizer.randint(min, max);};
+    //auto floatGenerator = [&randomizer](float min, float max){return randomizer.randfloat(min, max);};
 
-    v.populate(intGenerator, 0, 10, 0, v.len());
-    auto comp_g = [](int a, int b){return a > b;};
-    auto comp_s = [](int a, int b){return a < b;};
+    //v.populate(intGenerator, 0, 10, 0, v.len());
+    //auto comp_g = [](int a, int b){return a > b;};
+    //auto comp_s = [](int a, int b){return a < b;};
 
-    v.print();
+    //v.print();
     //heap<int> h(v, comp_s);
     //h.arr.print();
     //sorter::heap_sort(h, comp_s);
     //sorter::quick_sort(v, 0, v.len()-1, []<typename T>(vector<T>& arr, std::size_t left, std::size_t right){return left;});
     //h.arr.print();
     //sorter::insertion_sort(v);
-    sorter::shell_sort(v);
-    v.print();
-
-
+    //sorter::shell_sort(v);
+    //v.print();
+    
+    test_result test10k = test_int_10k_random();
+    std::cout<<test10k.__insertion<<'\n';
+    std::cout<<test10k.__shell<<'\n';
+    std::cout<<test10k.__quick<<'\n';
+    std::cout<<test10k.__heap<<'\n';
     
     return 0;
 }

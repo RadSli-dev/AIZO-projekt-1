@@ -27,14 +27,14 @@ public:
 
     template <typename T>
     static void gapped_insertion_sort(vector<T>& arr, const std::size_t gap){
-        std::cout<< "gap:" << gap<<'\n';
+       // std::cout<< "gap:" << gap<<'\n';
         for (std::size_t i = 0; i <= gap-1; i++){
-            std::cout << i << '\n';
+           // std::cout << i << '\n';
             for (std::size_t j = i + gap; j < arr.len(); j+=gap){
                 std::size_t k = j;
-                std::cout << "    " << j << '\n';
+               // std::cout << "    " << j << '\n';
                 while (k > i && arr[k-gap] > arr[k]){
-                    std::cout <<"        " << k << " " << k-gap << '\n';
+                   // std::cout <<"        " << k << " " << k-gap << '\n';
                     arr.swap(k,k-gap);
                     k-=gap;
                 }
@@ -59,7 +59,7 @@ public:
         //Correct bound check and default recursion case
         if (left >= arr.len() || right >= arr.len())
             throw std::invalid_argument("Err: quick_sort bounds are outside vector boundary");
-        if (left - right >= 10){
+        /*if (left - right >= 10){
             for (std::size_t i = left+1; i <= right; i++){
                 std::size_t j = i;
                 while (j > 0 && arr[j-1] > arr[j]){
@@ -68,7 +68,9 @@ public:
                 }
             }
             return;
-        }
+        }*/
+        if(left == right)
+            return;
 
         //pivot selection
         size_t pivot_index = pivot_select(arr, left, right);

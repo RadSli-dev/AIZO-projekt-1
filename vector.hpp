@@ -102,7 +102,7 @@ public:
             throw std::invalid_argument("Err: could not open file");
         }
         file << size <<'\n';
-        for (std::size_t i = 0; i < size; i++)
+        for (std::size_t i = 0; i < back; i++)
         {
             file << arr[i] << '\n';
         }
@@ -113,18 +113,17 @@ public:
         if(dest.len() < size)
             dest.resize(size);
         
-        for(std::size_t i = 0; i<size; i++)
+        for(std::size_t i = 0; i<back; i++)
             dest[i] = arr[i];
     }
 
     void print(){
-        for (std::size_t i = 0; i < size; i++){
-            std::cout<<arr[i]<< " ";
-        }
-        std::cout<<'\n';
+        print(0, back);
     }
 
     void print(std::size_t left, std::size_t right){
+        if(right > back || left > right || left > back)
+            throw std::invalid_argument("Err: invalid print bounds");
         for (std::size_t i = left; i<right; i++){
             std::cout<<arr[i]<<" ";
         }
@@ -132,6 +131,7 @@ public:
     }
     
     [[nodiscard]] std::size_t len() const { return size; }
+    [[nodiscard]] std::size_t last() const { return back; }
     
     T& operator[](std::size_t n){ return arr[n]; }
     T operator[](std::size_t n) const { return arr[n]; }
