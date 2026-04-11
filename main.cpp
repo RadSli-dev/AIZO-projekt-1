@@ -15,10 +15,10 @@ typedef struct{
     std::size_t test_size;
 }test_result;
 
-test_result test_int_10k_random(){
+test_result test_int_random(std::size_t test_size){
     randomizer randomizer;
     test_result t;
-    t.test_size = 10000;
+    t.test_size = test_size;
     
     auto intGenerator = [&randomizer](int min, int max){return randomizer.randint(min, max);};
     auto comp_s = [](int a, int b){return a < b;};
@@ -60,6 +60,41 @@ test_result test_int_10k_random(){
     return t;
 }
 
+void run_tests(std::size_t test_size){
+    std::cout<<"==================\n";
+    std::cout<<test_size<<'\n';
+    
+    test_result test10k = test_int_random(test_size);
+    std::cout<<test10k.__insertion<<'\n';
+    std::cout<<test10k.__shell<<'\n';
+    std::cout<<test10k.__quick<<'\n';
+    std::cout<<test10k.__heap<<'\n';
+    
+    std::chrono::duration<double> total_insertion;
+    std::chrono::duration<double> total_shell;
+    std::chrono::duration<double> total_quick;
+    std::chrono::duration<double> total_heap;
+    
+    for(int i = 0; i<20; i++){
+        test10k = test_int_random(test_size);
+        total_insertion += test10k.__insertion;
+        total_shell += test10k.__shell;
+        total_quick += test10k.__quick;
+        total_heap += test10k.__heap;
+    }
+    
+    total_insertion /= test_size;
+    total_shell /= test_size;
+    total_quick /= test_size;
+    total_heap /= test_size;
+    std::cout<<"==================\n";
+    std::cout<<test10k.__insertion<<'\n';
+    std::cout<<test10k.__shell<<'\n';
+    std::cout<<test10k.__quick<<'\n';
+    std::cout<<test10k.__heap<<'\n';
+    std::cout<<"==================\n";
+}
+
 
 int main(){
     //vector<int> v(15u);
@@ -80,12 +115,8 @@ int main(){
     //sorter::insertion_sort(v);
     //sorter::shell_sort(v);
     //v.print();
-    
-    test_result test10k = test_int_10k_random();
-    std::cout<<test10k.__insertion<<'\n';
-    std::cout<<test10k.__shell<<'\n';
-    std::cout<<test10k.__quick<<'\n';
-    std::cout<<test10k.__heap<<'\n';
+    for(std::size_t test_size = 10000; test_size < 100000; test_size*=2)
+        run_tests(test_size);
     
     return 0;
 }
