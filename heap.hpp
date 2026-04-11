@@ -43,7 +43,7 @@ public:
         heapify(0, comp);
     }
 
-    void swap(std::size_t i, std::size_t j){ arr.swap(i,j); }
+    void swap(std::size_t i, std::size_t j) { arr.swap(i,j); }
 
     T parent(const std::size_t i) const { return arr[(i-1)/2]; }
     T left(const std::size_t i) const { return arr[2*i+1]; }

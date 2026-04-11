@@ -57,9 +57,9 @@ public:
     template <typename T, typename Func>
     static void quick_sort(vector<T>& arr, std::size_t left, std::size_t right, Func pivot_select){
         //Correct bound check and default recursion case
-        if (left >= arr.len() || right >= arr.len())
+        /*if (left >= arr.len() || right >= arr.len())
             throw std::invalid_argument("Err: quick_sort bounds are outside vector boundary");
-        /*if (left - right >= 10){
+        if (right-left <= 10){
             for (std::size_t i = left+1; i <= right; i++){
                 std::size_t j = i;
                 while (j > 0 && arr[j-1] > arr[j]){
@@ -70,7 +70,7 @@ public:
             return;
         }*/
         if(left == right)
-            return;
+          return;
 
         //pivot selection
         size_t pivot_index = pivot_select(arr, left, right);

@@ -1,13 +1,10 @@
-#include "heap.hpp"
-#include "vector.hpp"
-#include "randomizer.hpp"
-#include "sorter.hpp"
+#include "testing.hpp"
 #include <chrono>
 
 #define INT_MIN 0x00000000
 #define INT_MAX 0x7fffffff
 
-typedef struct{
+/*typedef struct{
     std::chrono::duration<double> __insertion;
     std::chrono::duration<double> __shell;
     std::chrono::duration<double> __heap;
@@ -93,7 +90,7 @@ void run_tests(std::size_t test_size){
     std::cout<<test10k.__quick<<'\n';
     std::cout<<test10k.__heap<<'\n';
     std::cout<<"==================\n";
-}
+}*/
 
 
 int main(){
@@ -115,8 +112,9 @@ int main(){
     //sorter::insertion_sort(v);
     //sorter::shell_sort(v);
     //v.print();
-    for(std::size_t test_size = 10000; test_size < 100000; test_size*=2)
-        run_tests(test_size);
+    //for(std::size_t test_size = 80000; test_size < 100000; test_size*=2)
+    //    run_tests(test_size);
+    test_insert("a");
     
     return 0;
 }

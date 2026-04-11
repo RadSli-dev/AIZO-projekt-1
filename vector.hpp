@@ -78,7 +78,7 @@ public:
             back++;
         }
     }
-
+    
     void file_import(const std::string& filename){
         std::ifstream file(filename);
         if (!file){
