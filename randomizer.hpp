@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <concepts>
 
 class randomizer
 {
@@ -38,11 +39,19 @@ class randomizer
             return distribution(engine);
         } 
         
-    template <typename T>    
+    template <std::floating_point T>    
     T randT(T min, T max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_real_distribution<T> distribution(min, max);
+            return distribution(engine);
+        }
+        
+    template <std::integral T>    
+    T randT(T min, T max){
+            if (min > max) throw std::invalid_argument("min must be greater than max");
+
+            std::uniform_int_distribution<T> distribution(min, max);
             return distribution(engine);
         }
     private:

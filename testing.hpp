@@ -29,15 +29,14 @@ void test_insert(T x){
     test_result avg;
     
     for(std::size_t s = 0; s<7; s++){
+        std::cout<<s;
         vector<T> data((1<<s)*10000);
-        
         data.populate(randT, std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), 0, s*10000);
         const auto start_insertion{std::chrono::steady_clock::now()};
         sorter::insertion_sort(data);
         const auto finish_insertion{std::chrono::steady_clock::now()};
         const std::chrono::duration<double> elapsed_insertion{finish_insertion - start_insertion};
         t.times[s] = elapsed_insertion;
-        data.~vector();
     }
     print_test(t);
 }

@@ -114,7 +114,7 @@ int main(){
     //v.print();
     //for(std::size_t test_size = 80000; test_size < 100000; test_size*=2)
     //    run_tests(test_size);
-    test_insert("a");
+    test_insert('a');
     
     return 0;
 }
