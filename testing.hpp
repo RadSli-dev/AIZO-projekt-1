@@ -27,15 +27,14 @@ void test_insert(T x){
     t.test_info = "insertion sort test of sizes 10000*2^k for k in <1,7> for random numbers of type: ";
     t.test_info = std::format("{} {}", t.test_info, typeid(T).name());
     test_result avg;
-    
-    for(std::size_t s = 0; s<7; s++){
-        std::cout<<s;
-        vector<T> data((1<<s)*10000);
-        data.populate(randT, std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), 0, s*10000);
-        const auto start_insertion{std::chrono::steady_clock::now()};
+    std::size_t baseSize = 1000;
+    for(std::size_t s = 0; s<7; ++s){
+        vector<T> data((1<<s)*baseSize);
+        data.populate(randT, std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), 0, s*baseSize);
+        auto start_insertion{std::chrono::steady_clock::now()};
         sorter::insertion_sort(data);
-        const auto finish_insertion{std::chrono::steady_clock::now()};
-        const std::chrono::duration<double> elapsed_insertion{finish_insertion - start_insertion};
+        auto finish_insertion{std::chrono::steady_clock::now()};
+        std::chrono::duration<double> elapsed_insertion{finish_insertion - start_insertion};
         t.times[s] = elapsed_insertion;
     }
     print_test(t);
