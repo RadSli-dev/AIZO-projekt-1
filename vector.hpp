@@ -72,11 +72,10 @@ public:
         if(lower > upper or lower >= size or upper > size){
             throw std::invalid_argument("Err: invalid populate bounds\n");
         }
-        
         for(std::size_t i = lower; i<upper; i++){
             arr[i] = generator(min, max);
-            back++;
         }
+        this->back = upper;
     }
     
     void file_import(const std::string& filename){
@@ -141,7 +140,7 @@ public:
     
 private:    
     std::size_t size = 0;
-    unsigned back = 0;
+    std::size_t back = 0;
     const float growth = 1.6;
     
 };

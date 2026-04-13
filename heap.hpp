@@ -5,8 +5,7 @@ template <typename T>
 class heap{
 
 public:
-
-    heap(std::size_t size){
+    explicit heap(std::size_t size){
         arr.resize(size); //creates an empty heap of size n
         heapSize = size;
     }
@@ -36,8 +35,8 @@ public:
 
     template <typename Func>
     void build_heap(Func comp){
-        heapSize = arr.len();
-        for (std::size_t i = arr.len()/2; i > 0; --i){
+        heapSize = arr.back();
+        for (std::size_t i = arr.back()/2; i > 0; --i){
             heapify(i, comp);
         }
         heapify(0, comp);

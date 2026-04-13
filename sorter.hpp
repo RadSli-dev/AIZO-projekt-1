@@ -1,13 +1,14 @@
 #pragma once
 #include "vector.hpp"
 #include "heap.hpp"
+#include <thread>
 
 class sorter{
 public:
     //comp ma zwracać odpowiedź na zapytanie o pierwszy argument względem drugiego -> jeżeli chcemy zapytać o to czy l > r to comp(l,r) powinien zwracać true
     template <typename T, typename Func>
     static void heap_sort(heap<T>& arr, Func comp){
-        for (std::size_t i = arr.arr.len()-1; i > 0; --i){
+        for (std::size_t i = arr.heapSize-1; i > 0; --i){
             arr.swap(i,0);
             --arr.heapSize;
             arr.heapify(0, comp);
@@ -16,25 +17,23 @@ public:
 
     template <typename T>
     static void insertion_sort(vector<T>& arr){
-        for (int i = 1; i < arr.len(); i++){
-            int j = i;
-            while (j > 0 && arr[j-1] > arr[j]){
-                arr.swap(j,j-1);
+        for (std::size_t i = 1; i < arr.len(); i++){
+            T key = arr[i];
+            std::size_t j = i;
+            while (j > 0 && arr[j-1] > key){
+                arr[j]  = arr[j-1];
                 --j;
             }
+            arr[j] = key;
         }
     }
 
     template <typename T>
     static void gapped_insertion_sort(vector<T>& arr, const std::size_t gap){
-       // std::cout<< "gap:" << gap<<'\n';
         for (std::size_t i = 0; i <= gap-1; i++){
-           // std::cout << i << '\n';
-            for (std::size_t j = i + gap; j < arr.len(); j+=gap){
+            for (std::size_t j = i + gap; j < arr.last(); j+=gap){
                 std::size_t k = j;
-               // std::cout << "    " << j << '\n';
                 while (k > i && arr[k-gap] > arr[k]){
-                   // std::cout <<"        " << k << " " << k-gap << '\n';
                     arr.swap(k,k-gap);
                     k-=gap;
                 }
@@ -44,11 +43,11 @@ public:
     }
 
     template <typename T>
-    static void shell_sort(vector<T>& arr){
-        vector<T> gaps = {3888, 3456, 3072, 2916, 2592, 2304, 2187, 2048, 1944, 1728, 1536, 1458, 1296, 1152, 1024, 972,
+    static void shell_sort(vector<T>& arr, vector<std::size_t>& gaps){
+        /*vector<int> gaps = {3888, 3456, 3072, 2916, 2592, 2304, 2187, 2048, 1944, 1728, 1536, 1458, 1296, 1152, 1024, 972,
             864, 768, 729, 648, 576, 512, 486, 432, 384, 324, 288, 256, 243, 216, 192, 162, 144, 128, 108, 96, 81, 72, 64,
-            54, 48, 36, 32, 27, 24, 18, 16, 12, 9, 8, 6, 4, 3, 2, 1};
-        for (int gapi = 0; gapi < gaps.len(); gapi++){
+            54, 48, 36, 32, 27, 24, 18, 16, 12, 9, 8, 6, 4, 3, 2, 1};*/
+        for (std::size_t gapi = 0; gapi < gaps.last(); gapi++){
             if (gaps[gapi] < arr.len()){
                 gapped_insertion_sort(arr,gaps[gapi]);
             }
@@ -57,18 +56,20 @@ public:
     template <typename T, typename Func>
     static void quick_sort(vector<T>& arr, std::size_t left, std::size_t right, Func pivot_select){
         //Correct bound check and default recursion case
-        /*if (left >= arr.len() || right >= arr.len())
+        if (left >= arr.len() || right >= arr.len())
             throw std::invalid_argument("Err: quick_sort bounds are outside vector boundary");
-        if (right-left <= 10){
+        if (right-left <= 42){
             for (std::size_t i = left+1; i <= right; i++){
+                T key = arr[i];
                 std::size_t j = i;
-                while (j > 0 && arr[j-1] > arr[j]){
-                    arr.swap(j,j-1);
+                while (j > left && arr[j-1] > key){
+                    arr[j] = arr[j-1];
                     --j;
                 }
+                arr[j] = key;
             }
             return;
-        }*/
+        }
         if(left == right)
           return;
 
@@ -80,10 +81,12 @@ public:
         pivot_index = sorter::partition(arr, left, right, pivot_index);
 
         //recursive quick_sort call guarded by if statements to ensure correct bounds
-        if (pivot_index > left)
+        if (pivot_index > left){
             quick_sort(arr, left, pivot_index - 1, pivot_select);
-        if (pivot_index < right)
+        }
+        if (pivot_index < right){
             quick_sort(arr, pivot_index + 1, right, pivot_select);
+        }
     }
 
     template <typename T>

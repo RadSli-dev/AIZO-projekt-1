@@ -11,28 +11,28 @@ class randomizer
             this->engine.seed(rd());
         }
 
-    int randint(int min, int max){
+    int randint(const int min, const int max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_int_distribution<int> distribution(min, max);
             return distribution(engine);
         }
         
-    char randchar(char min, char max){
+    char randchar(const char min, const char max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_int_distribution<char> distribution(min, max);
             return distribution(engine);
         }    
 
-    float randfloat(float min, float max){
+    float randfloat(const float min, const float max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_real_distribution<float> distribution(min, max);
             return distribution(engine);
         }
         
-    double randdouble(double min, double max){
+    double randdouble(const double min, const double max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_real_distribution<double> distribution(min, max);
@@ -40,7 +40,7 @@ class randomizer
         } 
         
     template <std::floating_point T>    
-    T randT(T min, T max){
+    T randT(const T min, const T max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_real_distribution<T> distribution(min, max);
@@ -48,7 +48,7 @@ class randomizer
         }
         
     template <std::integral T>    
-    T randT(T min, T max){
+    T randT(const T min, const T max){
             if (min > max) throw std::invalid_argument("min must be greater than max");
 
             std::uniform_int_distribution<T> distribution(min, max);

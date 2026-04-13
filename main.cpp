@@ -90,7 +90,25 @@ void run_tests(std::size_t test_size){
 
 
 int main(){
-    test_insert('a');
-    
+    test_insert(1.f);
+    test_quick(1.f);
+
+    /*randomizer randomizer;
+
+    auto intGenerator = [&randomizer](int min, int max){return randomizer.randint(min, max);};
+    auto pivot_s = []<typename T>(vector<T>& arr, std::size_t left, std::size_t right){return right;};
+    vector<std::size_t> gaps = {
+        3888, 3456, 3072, 2916, 2592, 2304, 2187, 2048, 1944, 1728, 1536, 1458, 1296, 1152, 1024, 972,
+        864, 768, 729, 648, 576, 512, 486, 432, 384, 324, 288, 256, 243, 216, 192, 162, 144, 128, 108, 96, 81, 72, 64,
+        54, 48, 36, 32, 27, 24, 18, 16, 12, 9, 8, 6, 4, 3, 2, 1
+    };
+
+    vector<int> data1(10);
+    data1.populate(intGenerator, 0, 10, 0, 10);
+    sorter::quick_sort(data1, 0, data1.len() - 1, pivot_s);
+    //sorter::insertion_sort(data1);
+    //sorter::shell_sort(data1, gaps);
+    data1.print();*/
+
     return 0;
 }
