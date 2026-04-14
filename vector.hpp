@@ -11,22 +11,22 @@ class vector{
     
 public:
 
-    explicit vector(std::size_t initial = 0){ resize(initial); }
+    explicit vector(int initial = 1){ resize(initial); }
     template <typename Func>
-    explicit vector(std::size_t initial, Func generator, T min, T max, std::size_t lower, std::size_t upper){
+    explicit vector(int initial, Func generator, T min, T max, int lower, int upper){
         resize(initial);
         populate(generator,min,max,lower,upper);
     }
     explicit vector(const std::string& filename) { file_import(filename); }
     vector(std::initializer_list<T> init){
-        resize(init.size());
+        resize(static_cast<int>(init.size()));
         for (T t : init){
             push_back(t);
         }
     }
-    ~vector(){ free(arr); }
+    ~vector(){ delete[] arr; }
     
-    void push_back(T elem){
+    void push_back(const T& elem){
         if(back >= size)
             resize(growth);
             
@@ -34,45 +34,63 @@ public:
         back++;    
     }
     
-    void resize(std::size_t newSize){
+    void resize(int newSize){
         if(newSize == 0){
-            free(arr);
+            delete[] arr;
             arr = nullptr;
+            size = 0;
+            back = 0;
+            return;
         }
-        if(void* mem = realloc(arr, newSize * sizeof(T))){
-            arr = static_cast<T*>(mem);
-            size = newSize;
-        }else{
-            throw std::bad_alloc();
+
+        T* newArr = new T[newSize];
+
+        if(arr != nullptr){
+            int elementsToCopy = (back < newSize) ? back : newSize;
+            for(int i = 0; i < elementsToCopy; i++)
+                newArr[i] = std::move(arr[i]);
+            delete[] arr;
         }
+
+        arr = newArr;
+        size = newSize;
+        back = (back > size) ? size : back;
     }
     
     void resize(const float scale){
-        if(scale <= 0) {
-            throw std::invalid_argument("Err: scale must be positive");
+        if(scale <= 1.0f) {
+            throw std::invalid_argument("Err: scale must be strictly greater than 1 for growth");
         }
-        const std::size_t newSize = static_cast<unsigned>(size*scale);
+
+        // Force a minimum size if the vector is currently empty
+        if (size == 0) {
+            resize(static_cast<int>(2));
+            return;
+        }
+
+        int newSize = static_cast<int>(size * scale);
+
+        // Prevent the 1 * 1.6 = 1 truncation trap
+        if (newSize <= size) {
+            newSize = size + 1;
+        }
+
         resize(newSize);
     }
     
-    void swap(unsigned pos1, unsigned pos2){
-        
-        if(pos1 >= size || pos2 >= size){
-            throw std::invalid_argument("Err: attempting to swap elements outside vector boundary:\n");
-        }
-            
-        T temp = arr[pos1];
-        arr[pos1] = arr[pos2];
-        arr[pos2] = temp;
+    void swap(int pos1, int pos2){
+        T temp = std::move(arr[pos1]);
+        arr[pos1] = std::move(arr[pos2]);
+        arr[pos2] = std::move(temp);
     }
     
     template <typename Func>
-    void populate(Func generator, T min, T max,  std::size_t lower, std::size_t upper){
+    void populate(Func generator, T min, T max,  int lower, int upper){
         
         if(lower > upper or lower >= size or upper > size){
             throw std::invalid_argument("Err: invalid populate bounds\n");
         }
-        for(std::size_t i = lower; i<upper; i++){
+        for(int i = lower; i<upper; i++){
             arr[i] = generator(min, max);
         }
         this->back = upper;
@@ -87,7 +105,7 @@ public:
         file >> len;
         if (len > size)
             resize(len);
-        for (std::size_t i = 0; i < len; i++){
+        for (int i = 0; i < len; i++){
             file >> arr[i];
         }
         file.close();
@@ -101,7 +119,7 @@ public:
             throw std::invalid_argument("Err: could not open file");
         }
         file << size <<'\n';
-        for (std::size_t i = 0; i < back; i++)
+        for (int i = 0; i < back; i++)
         {
             file << arr[i] << '\n';
         }
@@ -112,7 +130,7 @@ public:
         if(dest.len() < size)
             dest.resize(size);
         dest.set_last(back);    
-        for(std::size_t i = 0; i<back; i++)
+        for(int i = 0; i<back; i++)
             dest[i] = arr[i];
     }
 
@@ -120,28 +138,28 @@ public:
         print(0, back);
     }
 
-    void print(std::size_t left, std::size_t right){
+    void print(int left, int right){
         if(right > back || left > right || left > back)
             throw std::invalid_argument("Err: invalid print bounds");
-        for (std::size_t i = left; i<right; i++){
+        for (int i = left; i<right; i++){
             std::cout<<arr[i]<<" ";
         }
         std::cout<<'\n';
     }
     
-    [[nodiscard]] std::size_t len() const { return size; }
-    [[nodiscard]] std::size_t last() const { return back; }
-    void set_last(std::size_t l) { this->back = l; }
+    [[nodiscard]] int len() const { return size; }
+    [[nodiscard]] int last() const { return back; }
+    void set_last(int l) { this->back = l; }
     
-    T& operator[](std::size_t n){ return arr[n]; }
-    T operator[](std::size_t n) const { return arr[n]; }
+    T& operator[](int n){ return arr[n]; }
+    T operator[](int n) const { return arr[n]; }
     
     T* arr = nullptr;
     
     
 private:    
-    std::size_t size = 0;
-    std::size_t back = 0;
-    const float growth = 1.6;
+    int size = 0;
+    int back = 0;
+    const float growth = 2.f;
     
 };
