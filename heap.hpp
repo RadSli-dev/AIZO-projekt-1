@@ -26,7 +26,8 @@ public:
             largest = left;
         if (right < heapSize and comp(arr[right], arr[largest]))
             largest = right;
-
+            
+        
         if (largest != i){
             arr.swap(i, largest);
             heapify(largest, comp);
@@ -35,8 +36,8 @@ public:
 
     template <typename Func>
     void build_heap(Func comp){
-        heapSize = arr.back();
-        for (std::size_t i = arr.back()/2; i > 0; --i){
+        heapSize = arr.last();
+        for (std::size_t i = arr.last()/2; i > 0; --i){
             heapify(i, comp);
         }
         heapify(0, comp);

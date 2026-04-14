@@ -7,12 +7,14 @@ class sorter{
 public:
     //comp ma zwracać odpowiedź na zapytanie o pierwszy argument względem drugiego -> jeżeli chcemy zapytać o to czy l > r to comp(l,r) powinien zwracać true
     template <typename T, typename Func>
-    static void heap_sort(heap<T>& arr, Func comp){
+    static void heap_sort(vector<T>& v, Func comp){
+        heap<T> arr(v, comp);
         for (std::size_t i = arr.heapSize-1; i > 0; --i){
             arr.swap(i,0);
             --arr.heapSize;
             arr.heapify(0, comp);
         }
+        arr.arr.copy_to(v);
     }
 
     template <typename T>

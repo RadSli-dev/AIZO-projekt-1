@@ -111,7 +111,7 @@ public:
     void copy_to(vector<T>& dest){
         if(dest.len() < size)
             dest.resize(size);
-        
+        dest.set_last(back);    
         for(std::size_t i = 0; i<back; i++)
             dest[i] = arr[i];
     }
@@ -131,6 +131,7 @@ public:
     
     [[nodiscard]] std::size_t len() const { return size; }
     [[nodiscard]] std::size_t last() const { return back; }
+    void set_last(std::size_t l) { this->back = l; }
     
     T& operator[](std::size_t n){ return arr[n]; }
     T operator[](std::size_t n) const { return arr[n]; }

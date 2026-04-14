@@ -90,8 +90,10 @@ void run_tests(std::size_t test_size){
 
 
 int main(){
-    test_insert(1.f);
-    test_quick(1.f);
+    std::size_t baseSize = 100000, iterations = 0;
+   // test_insert(1.f, baseSize, iterations);
+   // test_quick(1.f, baseSize*100, iterations);
+    test_heap(1.f, baseSize, iterations);
 
     /*randomizer randomizer;
 
