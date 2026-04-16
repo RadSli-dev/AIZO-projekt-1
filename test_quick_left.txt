@@ -1,0 +1,135 @@
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+quick sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type:  i
+0.0104253s
+0.0218003s
+0.0467403s
+0.0981162s
+0.198197s
+0.393775s
+0.818278s
+==================
+==================
+20 run averaged quick sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type: i
+0.00985519s
+0.0206602s
+0.0428511s
+0.0887065s
+0.184983s
+0.384178s
+0.797213s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+quick sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: i
+0.00783299s
+0.0172659s
+0.0355954s
+0.073129s
+0.15161s
+0.30692s
+0.65354s
+==================
+==================
+20 run averaged quick sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: i
+0.00774622s
+0.0163713s
+0.0343847s
+0.0714829s
+0.149371s
+0.309972s
+0.647149s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+quick sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: i
+0.00454376s
+0.00972285s
+0.0203524s
+0.0419654s
+0.0883232s
+0.188189s
+0.379205s
+==================
+==================
+20 run averaged quick sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: i
+0.00456267s
+0.00960405s
+0.0200508s
+0.0417849s
+0.0870111s
+0.183356s
+0.38117s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+quick sort test of sizes 500 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: i
+0.000283957s
+0.000963747s
+0.00369489s
+0.0140046s
+0.0552768s
+0.220681s
+0.885106s
+==================
+==================
+20 run averaged quick sort test of sizes 500 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: i
+0.000225395s
+0.000877809s
+0.00350109s
+0.0139928s
+0.0554171s
+0.220232s
+0.883084s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+quick sort test of sizes 500 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: i
+0.000241999s
+0.000906738s
+0.00359893s
+0.0142757s
+0.0563329s
+0.224617s
+0.882814s
+==================
+==================
+20 run averaged quick sort test of sizes 500 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: i
+0.000237295s
+0.000902655s
+0.00357922s
+0.0140497s
+0.0556853s
+0.22239s
+0.885609s
+==================

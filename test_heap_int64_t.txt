@@ -1,0 +1,100 @@
+==================
+heap sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type:  l
+0.0155247s
+0.0326215s
+0.0690661s
+0.153266s
+0.325863s
+0.69815s
+1.8079s
+==================
+==================
+20 run averaged heap sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type: l
+0.0141108s
+0.0298677s
+0.0653727s
+0.144693s
+0.321724s
+0.745068s
+1.88699s
+==================
+==================
+heap sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: l
+0.00999519s
+0.0212615s
+0.0472197s
+0.103602s
+0.226349s
+0.513313s
+1.40181s
+==================
+==================
+20 run averaged heap sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: l
+0.0101158s
+0.0219688s
+0.0474471s
+0.105737s
+0.232042s
+0.530193s
+1.38562s
+==================
+==================
+heap sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: l
+0.00525594s
+0.0113022s
+0.0237566s
+0.05219s
+0.113964s
+0.257331s
+0.646072s
+==================
+==================
+20 run averaged heap sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: l
+0.00536367s
+0.0113389s
+0.0246165s
+0.0540502s
+0.117584s
+0.261493s
+0.660522s
+==================
+==================
+heap sort test of sizes 100000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: l
+0.00683412s
+0.014413s
+0.0281306s
+0.0576384s
+0.118213s
+0.238282s
+0.497412s
+==================
+==================
+20 run averaged heap sort test of sizes 100000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: l
+0.00667422s
+0.0138642s
+0.0281198s
+0.0585506s
+0.122206s
+0.249544s
+0.520284s
+==================
+==================
+heap sort test of sizes 100000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: l
+0.00731472s
+0.0168828s
+0.0315848s
+0.0632222s
+0.130475s
+0.275052s
+0.579511s
+==================
+==================
+20 run averaged heap sort test of sizes 100000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: l
+0.00731385s
+0.0151259s
+0.0307576s
+0.0643093s
+0.13307s
+0.282065s
+0.599031s
+==================

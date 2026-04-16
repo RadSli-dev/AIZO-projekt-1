@@ -1,7 +1,5 @@
 #pragma once
 
-#include<cstdlib>
-#include<new>
 #include<iostream>
 #include<fstream>
 #include<initializer_list>
@@ -11,9 +9,9 @@ class vector{
     
 public:
 
-    explicit vector(int initial = 1){ resize(initial); }
+    explicit vector(const int initial = 1){ resize(initial); }
     template <typename Func>
-    explicit vector(int initial, Func generator, T min, T max, int lower, int upper){
+    explicit vector(const int initial, Func generator, T min, T max, int lower, int upper){
         resize(initial);
         populate(generator,min,max,lower,upper);
     }
@@ -22,6 +20,14 @@ public:
         resize(static_cast<int>(init.size()));
         for (T t : init){
             push_back(t);
+        }
+    }
+    vector(const vector& v) {
+        size = v.size;
+        back = v.back;
+        arr = new T[size];
+        for (int i = 0; i < back; ++i) {
+            arr[i] = v.arr[i];
         }
     }
     ~vector(){ delete[] arr; }
@@ -44,7 +50,6 @@ public:
         }
 
         T* newArr = new T[newSize];
-
         if(arr != nullptr){
             int elementsToCopy = (back < newSize) ? back : newSize;
             for(int i = 0; i < elementsToCopy; i++)
@@ -61,16 +66,12 @@ public:
         if(scale <= 1.0f) {
             throw std::invalid_argument("Err: scale must be strictly greater than 1 for growth");
         }
-
-        // Force a minimum size if the vector is currently empty
         if (size == 0) {
             resize(static_cast<int>(2));
             return;
         }
 
         int newSize = static_cast<int>(size * scale);
-
-        // Prevent the 1 * 1.6 = 1 truncation trap
         if (newSize <= size) {
             newSize = size + 1;
         }
@@ -108,12 +109,12 @@ public:
         for (int i = 0; i < len; i++){
             file >> arr[i];
         }
+        back = len;
         file.close();
 
     }
 
-    void file_export(const std::string& filename)
-    {
+    void file_export(const std::string& filename){
         std::ofstream file(filename);
         if (!file){
             throw std::invalid_argument("Err: could not open file");

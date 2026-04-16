@@ -1,0 +1,135 @@
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+shell sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type:  f
+0.0160984s
+0.0335789s
+0.0708785s
+0.149237s
+0.309446s
+0.644784s
+1.53384s
+==================
+==================
+20 run averaged shell sort test of sizes 100000 *2^k for k in <1,7> for random numbers of type:  f
+0.0155919s
+0.0327657s
+0.0679506s
+0.140712s
+0.305897s
+0.715197s
+1.80399s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+shell sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type:  f
+0.0109127s
+0.0219257s
+0.045929s
+0.0979852s
+0.203301s
+0.434852s
+0.970197s
+==================
+==================
+20 run averaged shell sort test of sizes 100000 *2^k for k in <1,7> for 33% sorted array of random numbers of type:  f
+0.0106486s
+0.0223701s
+0.0460304s
+0.0949072s
+0.201153s
+0.433841s
+0.983734s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+shell sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type:  f
+0.00541179s
+0.0114939s
+0.023868s
+0.0496881s
+0.101988s
+0.211919s
+0.539399s
+==================
+==================
+20 run averaged shell sort test of sizes 100000 *2^k for k in <1,7> for 67% sorted array of random numbers of type:  f
+0.00555497s
+0.0116836s
+0.0246003s
+0.0506401s
+0.104417s
+0.218036s
+0.469586s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+shell sort test of sizes 100000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type:  f
+0.00112784s
+0.00238568s
+0.0046073s
+0.00938137s
+0.0198274s
+0.0393976s
+0.0842567s
+==================
+==================
+20 run averaged shell sort test of sizes 100000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type:  f
+0.00119736s
+0.00236186s
+0.00517724s
+0.0103091s
+0.0215573s
+0.0402635s
+0.0834688s
+==================
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+0 1
+==================
+shell sort test of sizes 100000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type:  f
+0.00209068s
+0.00507255s
+0.0108013s
+0.0271654s
+0.0726942s
+0.254028s
+0.847301s
+==================
+==================
+20 run averaged shell sort test of sizes 100000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type:  f
+0.00208206s
+0.00452449s
+0.010136s
+0.0256543s
+0.0793422s
+0.260773s
+0.854695s
+==================

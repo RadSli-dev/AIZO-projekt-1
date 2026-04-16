@@ -1,0 +1,100 @@
+==================
+insertion sort test of sizes 1000 *2^k for k in <1,7> for random numbers of type:  f
+0.000400108s
+0.00131667s
+0.00522329s
+0.0203925s
+0.0791078s
+0.32207s
+1.41821s
+==================
+==================
+20 run averaged insertion sort test of sizes 1000 *2^k for k in <1,7> for random numbers of type: f
+0.000368563s
+0.00137502s
+0.00530958s
+0.0211973s
+0.0858872s
+0.351029s
+1.42416s
+==================
+==================
+insertion sort test of sizes 1000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: f
+0.000147179s
+0.000602626s
+0.00239857s
+0.00939354s
+0.03922s
+0.155351s
+0.621865s
+==================
+==================
+20 run averaged insertion sort test of sizes 1000 *2^k for k in <1,7> for 33% sorted array of random numbers of type: f
+0.000199462s
+0.000787695s
+0.00310885s
+0.0124698s
+0.0505345s
+0.204634s
+0.810893s
+==================
+==================
+insertion sort test of sizes 1000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: f
+4.6978e-05s
+0.000195602s
+0.000670473s
+0.00252537s
+0.0100853s
+0.039886s
+0.16143s
+==================
+==================
+20 run averaged insertion sort test of sizes 1000 *2^k for k in <1,7> for 67% sorted array of random numbers of type: f
+4.5902e-05s
+0.000162083s
+0.000608662s
+0.00231908s
+0.00920955s
+0.0380402s
+0.154161s
+==================
+==================
+insertion sort test of sizes 1000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: f
+1.039e-06s
+1.871e-06s
+3.845e-06s
+7.794e-06s
+1.5173e-05s
+3.0139e-05s
+6.6201e-05s
+==================
+==================
+20 run averaged insertion sort test of sizes 1000 *2^k for k in <1,7> for sorted nondesc array of random numbers of type: f
+9.5615e-07s
+1.8913e-06s
+3.8036e-06s
+8.01795e-06s
+1.59736e-05s
+3.18434e-05s
+6.45804e-05s
+==================
+==================
+insertion sort test of sizes 1000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: f
+0.000688934s
+0.00272674s
+0.0103599s
+0.0434621s
+0.182646s
+0.736198s
+2.9345s
+==================
+==================
+20 run averaged insertion sort test of sizes 1000 *2^k for k in <1,7> for sorted nonasc array of random numbers of type: f
+0.000670229s
+0.00268862s
+0.0105525s
+0.0440621s
+0.177617s
+0.717272s
+2.88994s
+==================
